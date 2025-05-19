@@ -14,6 +14,9 @@
     <div class="d-flex justify-content-end gap-5">
         @can('update', $post)
             <a href="#" class="btn btn-primary">Edit post</a>
-        @endcanany
+        @endcan
+        @can('delete', $post)
+            <a href="#" class="btn btn-danger">Delete post</a>
+        @endcan
     </div>
 </div>
