@@ -1,4 +1,4 @@
-<div class="d-flex bg-black text-white justify-content-between">
+<div class="d-flex bg-black text-white justify-content-between p-3">
     <div>
         Username: <strong>{{ Auth::user()->name }}</strong>
     </div>
