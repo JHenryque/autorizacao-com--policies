@@ -1,8 +1,16 @@
 @extends('layouts.main_layout')
 @section('content')
 
-<p class="display-6 text-secondary text-center py-5">CONTENT</p>
-
+    @can('create', \App\Models\Post::class
+)
+        <div class="container my-3">
+            <div class="row">
+                <div class="col">
+                    <a href="{{ route('create') }}" class="btn btn-primary">Create post</a>
+                </div>
+            </div>
+        </div>
+    @endcan
     @if($posts->count() == 0)
         <div class="my-5 opacity-50">
             No Posts found

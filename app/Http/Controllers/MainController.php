@@ -42,4 +42,13 @@ class MainController extends Controller
             echo 'O usuario nao pode eliminar o post!';
         }
     }
+
+    public function create()
+    {
+        if (Auth::user()->can('create', Post::class)) {
+            echo 'O usuario pode Criar o post!';
+        } else {
+            echo 'O usuario nao pode criar o post!';
+        }
+    }
 }

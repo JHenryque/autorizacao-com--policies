@@ -13,6 +13,8 @@ Route::middleware('auth')->group(function () {
     Route::redirect('/', '/home');
     Route::get('home', [MainController::class, 'index'])->name('home');
 
+    Route::get('/post_create', [MainController::class, 'create'])->name('create');
+
     Route::get('/post_update/{id}', [MainController::class, 'update'])->name('update');
 
     Route::get('/post_delete/{id}', [MainController::class, 'delete'])->name('delete');
