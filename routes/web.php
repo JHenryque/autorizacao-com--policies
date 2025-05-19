@@ -12,5 +12,10 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::redirect('/', '/home');
     Route::get('home', [MainController::class, 'index'])->name('home');
+
+    Route::get('/post_update/{id}', [MainController::class, 'update'])->name('update');
+
+    Route::get('/post_delete/{id}', [MainController::class, 'delete'])->name('delete');
+
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
