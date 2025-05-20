@@ -55,7 +55,8 @@ class PostPolicy
      */
     public function update(User $user, Post $post): bool
     {
-        return ($user->role === 'admin' || $user->id === $post->user_id);
+        //return ($user->role === 'admin' || $user->id === $post->user_id);
+        return $user->permissions->contains('permission', 'update_post');
     }
 
     /**
@@ -63,7 +64,8 @@ class PostPolicy
      */
     public function delete(User $user, Post $post): bool
     {
-        return ($user->role === 'admin' || $user->id === $post->user_id);
+        //return ($user->role === 'admin' || $user->id === $post->user_id);
+        return $user->permissions->contains('permission', 'delete_post');
     }
 
     /**
