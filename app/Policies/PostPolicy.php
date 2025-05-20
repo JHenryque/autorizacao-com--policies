@@ -33,6 +33,11 @@ class PostPolicy
             return true;
         }
         return false;
+//        if ($user->permissions()->where('permission', 'create-post')->exists()) {
+//            return true;
+//        } else {
+//            return false;
+//        }
     }
 
     /**
