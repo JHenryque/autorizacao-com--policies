@@ -28,7 +28,7 @@ class PostPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(User $user): Response
     {
 //        if ($user->role !== 'visitor') {
 //            return true;
@@ -39,7 +39,7 @@ class PostPolicy
         //return$user->permissions()->where('permission', 'create_post')->exists();
 
         // get information from database (v2)
-        return $user->permissions->contains('permission', 'create_post');
+        //return $user->permissions->contains('permission', 'create_post');
 
         // get information from database (v3)
 //        foreach (Auth::user()->permissions as $permission) {
@@ -48,6 +48,12 @@ class PostPolicy
 //            }
 //        }
 //        return false;
+        if ($user->permissions->contains('permission', 'create_post')) {
+            return Response::allow();
+        } else {
+            return Response::denyWithStatus(403, 'voce nao tem permissão para esta ação');
+        }
+
     }
 
     /**

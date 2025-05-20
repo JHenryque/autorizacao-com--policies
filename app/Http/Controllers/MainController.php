@@ -6,6 +6,7 @@ use App\Models\Post;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
 class MainController extends Controller
@@ -45,10 +46,26 @@ class MainController extends Controller
 
     public function create()
     {
-        if (Auth::user()->can('create', Post::class)) {
-            echo 'O usuario pode Criar o post!';
+//        if (Auth::user()->can('create', Post::class)) {
+//            echo 'O usuario pode Criar o post!';
+//        } else {
+//            echo 'O usuario nao pode criar o post!';
+//        }
+
+        $response = Gate::inspect('create', Post::class);
+
+//        if ($response->allowed()) {
+//            echo 'Usuário pode criar um post';
+//        } else {
+//            echo $response->message();
+//        }
+
+        if ($response->allowed()) {
+            echo 'Usuário pode criar um post';
         } else {
-            echo 'O usuario nao pode criar o post!';
+            if ($response->status() === 403) {
+                abort(403, $response->message());
+            }
         }
     }
 }
