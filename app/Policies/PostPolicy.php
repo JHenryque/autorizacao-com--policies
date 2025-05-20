@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class PostPolicy
 {
+    public function before(User $user)
+    {
+        if ($user->name === 'SUPER')
+        {
+            return true;
+        }
+        return null;
+    }
     /**
      * Determine whether the user can view any models.
      */
