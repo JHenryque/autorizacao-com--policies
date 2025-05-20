@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Auth;
 
 class PostPolicy
 {
@@ -29,15 +30,24 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
-        if ($user->role !== 'visitor') {
-            return true;
-        }
-        return false;
-//        if ($user->permissions()->where('permission', 'create-post')->exists()) {
+//        if ($user->role !== 'visitor') {
 //            return true;
-//        } else {
-//            return false;
 //        }
+//        return false;
+
+        // get information from database (v1)
+        //return$user->permissions()->where('permission', 'create_post')->exists();
+
+        // get information from database (v2)
+        return $user->permissions->contains('permission', 'create_post');
+
+        // get information from database (v3)
+//        foreach (Auth::user()->permissions as $permission) {
+//            if ($permission['permission'] === 'create_post') {
+//                return true;
+//            }
+//        }
+//        return false;
     }
 
     /**
